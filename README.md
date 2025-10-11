@@ -204,7 +204,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Developer
 
-- **Developer**: Dewa Koding Team
+- **Developer**: Idiarso, S.KOm
 - **School**: SMKN 1 Punggelan
 - **Contact**: [GitHub Issues](https://github.com/idiarso4/dewa-front-flutter/issues)
 
