@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 abstract class AppWidget<T extends AppProvider, P1, P2>
     extends StatelessWidget {
-  const AppWidget({super.key, this.param1, this.param2});
+  AppWidget({super.key, this.param1, this.param2});
 
   late T notifier;
   final P1? param1;

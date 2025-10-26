@@ -9,7 +9,7 @@ import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
 import 'package:presensi_smkn1punggelan/core/widget/loading_app_widget.dart';
 
 class MapScreen extends AppWidget<MapNotifier, void, void> {
-  const MapScreen({super.key});
+  MapScreen({super.key});
 
   @override
   void checkVariableAfterUi(BuildContext context) {

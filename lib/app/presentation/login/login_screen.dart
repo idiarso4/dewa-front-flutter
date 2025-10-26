@@ -7,7 +7,7 @@ import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends AppWidget<LoginNotifier, void, void> {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
   @override
   void checkVariableAfterUi(BuildContext context) {
     if (notifier.isLoged) {

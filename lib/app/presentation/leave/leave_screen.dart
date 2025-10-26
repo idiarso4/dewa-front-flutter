@@ -6,7 +6,7 @@ import 'package:presensi_smkn1punggelan/core/helper/date_time_helper.dart';
 import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
 
 class LeaveScreen extends AppWidget<LeaveNotifier, void, void> {
-  const LeaveScreen({super.key});
+  LeaveScreen({super.key});
 
   @override
   AppBar? appBarBuild(BuildContext context) {

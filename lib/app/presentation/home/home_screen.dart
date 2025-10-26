@@ -11,7 +11,7 @@ import 'package:presensi_smkn1punggelan/core/helper/shared_preferences_helper.da
 import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
 
 class HomeScreen extends AppWidget<HomeNotifier, void, void> {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   Widget bodyBuild(BuildContext context) {
