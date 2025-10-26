@@ -1,35 +1,15 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:flutter/material.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:presensi_smkn1punggelan/app/presentation/map/map_notifier.dart';
 import 'package:presensi_smkn1punggelan/core/helper/global_helper.dart';
 import 'package:presensi_smkn1punggelan/core/helper/location_helper.dart';
 import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
 import 'package:presensi_smkn1punggelan/core/widget/loading_app_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 
 class MapScreen extends AppWidget<MapNotifier, void, void> {
-  MapScreen({super.key});
-
-  @override
-  void checkVariableBeforeUi(BuildContext context) {
-    if (!notifier.isGrantedLocaiton) {
-      alternatifErrorButton = FilledButton(
-          onPressed: () async {
-            await LocationHelper.showDialogLocationPermission(context);
-            notifier.checkLocationPermission();
-          },
-          child: Text('Setujui'));
-    } else if (!notifier.isEnabledLocation) {
-      alternatifErrorButton = FilledButton(
-          onPressed: () async {
-            LocationHelper.openLocationSetting();
-            notifier.checkLocationService();
-          },
-          child: Text('Buka Pengaturan Lokasi'));
-    } else {
-      alternatifErrorButton = null;
-    }
-  }
+  const MapScreen({super.key});
 
   @override
   void checkVariableAfterUi(BuildContext context) {
@@ -171,5 +151,26 @@ class MapScreen extends AppWidget<MapNotifier, void, void> {
 
   _onPressSubmit() {
     notifier.send();
+  }
+
+  @override
+  FilledButton? alternatifErrorButton(BuildContext context) {
+    if (!notifier.isGrantedLocaiton) {
+      return FilledButton(
+          onPressed: () async {
+            await LocationHelper.showDialogLocationPermission(context);
+            notifier.checkLocationPermission();
+          },
+          child: Text('Setujui'));
+    }
+    if (!notifier.isEnabledLocation) {
+      return FilledButton(
+          onPressed: () async {
+            LocationHelper.openLocationSetting();
+            notifier.checkLocationService();
+          },
+          child: Text('Buka Pengaturan Lokasi'));
+    }
+    return null;
   }
 }

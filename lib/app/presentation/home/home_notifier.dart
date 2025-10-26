@@ -1,43 +1,33 @@
-import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:presensi_smkn1punggelan/app/domain/entity/attendance.dart';
 import 'package:presensi_smkn1punggelan/app/domain/entity/schedule.dart';
 import 'package:presensi_smkn1punggelan/app/domain/use_case/attendance_get_this_month.dart';
 import 'package:presensi_smkn1punggelan/app/domain/use_case/attendance_get_today.dart';
-import 'package:presensi_smkn1punggelan/app/domain/use_case/schedule_banned.dart';
 import 'package:presensi_smkn1punggelan/app/domain/use_case/schedule_get.dart';
 import 'package:presensi_smkn1punggelan/core/constant/constant.dart';
-import 'package:presensi_smkn1punggelan/core/helper/date_time_helper.dart';
-import 'package:presensi_smkn1punggelan/core/helper/notification_helper.dart';
 import 'package:presensi_smkn1punggelan/core/helper/shared_preferences_helper.dart';
-import 'package:presensi_smkn1punggelan/core/provider/app_provider.dart';
 import 'package:presensi_smkn1punggelan/core/widget/base_notifier.dart';
-import 'package:flutter/material.dart';
 
 class HomeNotifier extends BaseNotifier {
   final ScheduleGetUseCase _scheduleGet;
   final AttendanceGetTodayUseCase _attendanceGetToday;
   final AttendanceGetMonthUseCase _attendanceGetThisMonth;
-  final ScheduleBannedUseCase _scheduleBanned;
 
   HomeNotifier(
     this._scheduleGet,
     this._attendanceGetToday,
     this._attendanceGetThisMonth,
-    this._scheduleBanned,
   );
 
   String _name = '';
   ScheduleEntity? _schedule;
   AttendanceEntity? _attendanceToday;
   List<AttendanceEntity> _attendanceThisMonth = [];
-  bool _isLeaves = false;
 
   String get name => _name;
   ScheduleEntity? get schedule => _schedule;
   AttendanceEntity? get attendanceToday => _attendanceToday;
   List<AttendanceEntity> get attendanceThisMonth => _attendanceThisMonth;
-  bool get isLeaves => _isLeaves;
+  bool get isLeaves => false;
 
   @override
   Future<void> init() async {

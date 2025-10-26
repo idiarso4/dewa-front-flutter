@@ -29,6 +29,7 @@ class LocationHelper {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
+        if (!context.mounted) return false;
         DialogHelper.showSnackbar(
             context: context, text: "Perizinan lokasi ditolak");
         return false;

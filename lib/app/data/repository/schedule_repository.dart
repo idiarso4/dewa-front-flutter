@@ -1,4 +1,4 @@
-﻿import 'package:presensi_smkn1punggelan/app/data/model/schedule_response.dart';
+import 'package:presensi_smkn1punggelan/app/data/model/schedule.dart';
 import 'package:presensi_smkn1punggelan/app/data/source/schedule_api_service.dart';
 import 'package:presensi_smkn1punggelan/app/domain/entity/schedule.dart';
 import 'package:presensi_smkn1punggelan/app/domain/repository/schedule_repository.dart';
@@ -16,8 +16,12 @@ class ScheduleRepositoryImpl extends ScheduleRepository {
     return handleResponse(
       () => _scheduleApiService.get(),
       (json) {
-        final response = ScheduleResponse.fromJson(json);
-        final data = response.schedule.toEntity();
+        if (json == null) {
+          throw Exception('Data jadwal kosong dari server');
+        }
+
+        final data =
+            ScheduleModel.fromJson(Map<String, dynamic>.from(json)).toEntity();
         SharedPreferencesHelper.setString(PREF_START_SHIFT, data.startTime);
         SharedPreferencesHelper.setString(PREF_END_SHIFT, data.endTime);
         return data;

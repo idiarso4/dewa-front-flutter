@@ -8,29 +8,29 @@ part of 'schedule.dart';
 
 ScheduleModel _$ScheduleModelFromJson(Map<String, dynamic> json) =>
     ScheduleModel(
-      id: (json['id'] as num).toInt(),
-      startTime: json['start_time'] as String,
-      endTime: json['end_time'] as String,
-      isWfa: json['is_wfa'] as bool,
+      id: _intFromJson(json['id']),
+      startTime: _stringFromJson(json['start_time']),
+      endTime: _stringFromJson(json['end_time']),
+      isWfa: _boolFromJson(json['is_wfa']),
       office: OfficeModel.fromJson(json['office'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ScheduleModelToJson(ScheduleModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'start_time': instance.startTime,
-      'end_time': instance.endTime,
+      'start_time': _stringToJson(instance.startTime),
+      'end_time': _stringToJson(instance.endTime),
       'is_wfa': instance.isWfa,
       'office': instance.office,
     };
 
 OfficeModel _$OfficeModelFromJson(Map<String, dynamic> json) => OfficeModel(
-      id: (json['id'] as num).toInt(),
+      id: _intFromJson(json['id']),
       name: json['name'] as String,
-      address: json['address'] as String,
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-      radius: (json['radius'] as num).toInt(),
+      address: json['address'] as String? ?? '',
+      latitude: _doubleFromJson(json['latitude']),
+      longitude: _doubleFromJson(json['longitude']),
+      radius: _intFromJson(json['radius']),
     );
 
 Map<String, dynamic> _$OfficeModelToJson(OfficeModel instance) =>

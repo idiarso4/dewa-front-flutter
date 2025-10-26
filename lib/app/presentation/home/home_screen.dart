@@ -1,12 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
-import 'package:presensi_smkn1punggelan/app/presentation/home/home_notifier.dart';
-import 'package:presensi_smkn1punggelan/core/helper/date_time_helper.dart';
 import 'package:presensi_smkn1punggelan/app/presentation/detail_attendance/detail_attendance_screen.dart';
+import 'package:presensi_smkn1punggelan/app/presentation/home/home_notifier.dart';
 import 'package:presensi_smkn1punggelan/app/presentation/leave/leave_screen.dart';
+import 'package:presensi_smkn1punggelan/app/presentation/login/login_screen.dart';
+import 'package:presensi_smkn1punggelan/app/presentation/map/map_screen.dart';
+import 'package:presensi_smkn1punggelan/core/helper/date_time_helper.dart';
+import 'package:presensi_smkn1punggelan/core/helper/shared_preferences_helper.dart';
+import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
 
 class HomeScreen extends AppWidget<HomeNotifier, void, void> {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget bodyBuild(BuildContext context) {
@@ -106,15 +111,15 @@ class HomeScreen extends AppWidget<HomeNotifier, void, void> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => Container(
+      builder: (bottomSheetContext) => Container(
         padding: EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
               leading: CircleAvatar(
-                child: Icon(Icons.person),
                 backgroundColor: Color(0xFF1A237E).withOpacity(0.1),
+                child: Icon(Icons.person),
               ),
               title: Text(notifier.name),
               subtitle: Text(notifier.schedule?.office.name ?? 'No Office'),
@@ -124,7 +129,7 @@ class HomeScreen extends AppWidget<HomeNotifier, void, void> {
               leading: Icon(Icons.notifications_active),
               title: Text('Pengaturan Notifikasi'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pop(bottomSheetContext);
                 _onPressEditNotification(context);
               },
             ),
@@ -132,7 +137,7 @@ class HomeScreen extends AppWidget<HomeNotifier, void, void> {
               leading: Icon(Icons.logout, color: Colors.red),
               title: Text('Logout', style: TextStyle(color: Colors.red)),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pop(bottomSheetContext);
                 _onPressLogout(context);
               },
             ),
@@ -220,7 +225,7 @@ class HomeScreen extends AppWidget<HomeNotifier, void, void> {
           ),
           SizedBox(height: 20),
           if (!notifier.isLeaves)
-            Container(
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () => _onPressCreateAttendance(context),
@@ -307,15 +312,42 @@ class HomeScreen extends AppWidget<HomeNotifier, void, void> {
     );
   }
 
-  void _onPressCreateAttendance(BuildContext context) {
-    // TODO: Implement attendance creation
+  Future<void> _onPressCreateAttendance(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => MapScreen()),
+    );
+    await notifier.init(); // refresh attendance data after returning from map screen
   }
 
-  void _onPressEditNotification(BuildContext context) {
-    // TODO: Implement notification settings
-  }
+  void _onPressEditNotification(BuildContext context) {}
 
-  void _onPressLogout(BuildContext context) {
-    // TODO: Implement logout functionality
+  Future<void> _onPressLogout(BuildContext context) async {
+    final shouldLogout = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Konfirmasi Logout'),
+        content: Text('Apakah Anda yakin ingin keluar dari akun ini?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text('Batal'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text('Logout'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldLogout == true) {
+      await SharedPreferencesHelper.logout();
+      if (!context.mounted) return;
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => LoginScreen()),
+        (route) => false,
+      );
+    }
   }
 }

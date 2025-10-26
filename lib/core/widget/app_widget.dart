@@ -1,23 +1,18 @@
-﻿import 'package:presensi_smkn1punggelan/core/di/dependency.dart';
+import 'package:flutter/material.dart';
+import 'package:presensi_smkn1punggelan/core/di/dependency.dart';
 import 'package:presensi_smkn1punggelan/core/helper/dialog_helper.dart';
 import 'package:presensi_smkn1punggelan/core/provider/app_provider.dart';
 import 'package:presensi_smkn1punggelan/core/widget/error_app_widget.dart';
 import 'package:presensi_smkn1punggelan/core/widget/loading_app_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 abstract class AppWidget<T extends AppProvider, P1, P2>
     extends StatelessWidget {
-  AppWidget({super.key, this.param1, this.param2});
+  const AppWidget({super.key, this.param1, this.param2});
 
   late T notifier;
   final P1? param1;
   final P2? param2;
-  FilledButton? _alternatifErrorButton;
-
-  set alternatifErrorButton(FilledButton? param) =>
-      _alternatifErrorButton = param;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +49,7 @@ abstract class AppWidget<T extends AppProvider, P1, P2>
                     notifier.init();
                     notifier.errorMeesage = '';
                   },
-                  alternatifButton: _alternatifErrorButton,
+                  alternatifButton: alternatifErrorButton(context),
                 )
               : bodyBuild(context),
     );
@@ -62,6 +57,7 @@ abstract class AppWidget<T extends AppProvider, P1, P2>
 
   void checkVariableBeforeUi(BuildContext context) {}
   void checkVariableAfterUi(BuildContext context) {}
+  FilledButton? alternatifErrorButton(BuildContext context) => null;
   AppBar? appBarBuild(BuildContext context) => null;
   Widget bodyBuild(BuildContext context);
 }

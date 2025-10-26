@@ -41,6 +41,7 @@ class ErrorAppWidget extends StatelessWidget {
                   ? FilledButton(
                       onPressed: () async {
                         await SharedPreferencesHelper.logout();
+                        if (!context.mounted) return;
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(

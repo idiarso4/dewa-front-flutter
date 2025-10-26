@@ -33,8 +33,7 @@ class PhotoRepositoryImpl extends PhotoRepository {
 
   @override
   Future<String> savePhoto(List<int> bytes, String filename) async {
-    // TODO: Implement save photo functionality
-    // This should save the photo bytes to local storage and return the path
-    throw UnimplementedError('savePhoto not yet implemented');
+    throw UnimplementedError(
+        'Saving photo bytes locally is not supported on this implementation.');
   }
 }

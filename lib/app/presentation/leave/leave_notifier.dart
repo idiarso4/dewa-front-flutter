@@ -21,7 +21,11 @@ class LeaveNotifier extends AppProvider {
 
   @override
   void init() {
-    // TODO: implement init
+    _isSuccess = false;
+    _startDateController.clear();
+    _endDateController.clear();
+    _reasonController.clear();
+    notifyListeners();
   }
 
   send() async {

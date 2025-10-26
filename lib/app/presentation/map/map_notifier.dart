@@ -86,13 +86,17 @@ class MapNotifier extends AppProvider {
   _checkShift() {
     final now = DateTime.now();
     final startTimeShift = _schedule!.startTime.split(':');
+
+    final hour = int.tryParse(startTimeShift.elementAt(0)) ?? 0;
+    final minute = startTimeShift.length > 1
+        ? int.tryParse(startTimeShift[1]) ?? 0
+        : 0;
+    final second = startTimeShift.length > 2
+        ? int.tryParse(startTimeShift[2]) ?? 0
+        : 0;
+
     final dateTimeShift = DateTime(
-        now.year,
-        now.month,
-        now.day,
-        int.parse(startTimeShift[0]),
-        int.parse(startTimeShift[1]),
-        int.parse(startTimeShift[2]));
+        now.year, now.month, now.day, hour, minute, second);
     if (DateTimeHelper.getDifference(a: now, b: dateTimeShift) >
         Duration(minutes: 30)) {
       errorMeesage =
@@ -138,14 +142,16 @@ class MapNotifier extends AppProvider {
             }
             _currentLocation = GeoPoint(
                 latitude: position.latitude, longitude: position.longitude);
-            _mapController.addMarker(_currentLocation!,
-                markerIcon: MarkerIcon(
-                  icon: Icon(
-                    Icons.account_circle,
-                    color: Colors.red,
-                    size: 30,
-                  ),
-                ));
+            _mapController.addMarker(
+              _currentLocation!,
+              markerIcon: MarkerIcon(
+                iconWidget: Icon(
+                  Icons.account_circle,
+                  color: Colors.red,
+                  size: 30,
+                ),
+              ),
+            );
             _mapController.moveTo(_currentLocation!, animate: true);
             _validationSubmitButton();
           } else {

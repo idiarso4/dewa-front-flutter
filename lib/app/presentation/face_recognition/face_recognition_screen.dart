@@ -8,7 +8,7 @@ class Notifier {
   // Add properties and methods as needed
   void notify() {
     // Example method
-    print("Notifier is notifying!");
+    debugPrint("Notifier is notifying!");
   }
 }
 

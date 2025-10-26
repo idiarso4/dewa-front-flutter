@@ -27,9 +27,12 @@ class DetailAttendanceNotifier extends AppProvider {
     DropdownMenuEntry<int>(value: 11, label: 'November'),
     DropdownMenuEntry<int>(value: 12, label: 'Desember')
   ];
-  final List<DropdownMenuEntry<int>> _yearListDropdown = [
-    DropdownMenuEntry<int>(value: 2024, label: '2024')
-  ];
+  final List<DropdownMenuEntry<int>> _yearListDropdown = List.generate(
+      3,
+      (index) {
+        final year = DateTime.now().year - index;
+        return DropdownMenuEntry<int>(value: year, label: '$year');
+      });
 
   List<AttendanceEntity> _listAttendance = [];
 
@@ -43,7 +46,13 @@ class DetailAttendanceNotifier extends AppProvider {
 
   @override
   void init() {
-    // TODO: implement init
+    final now = DateTime.now();
+    final monthIndex =
+        (now.month - 1).clamp(0, _monthListDropdown.length - 1) as int;
+    _monthController.text = _monthListDropdown[monthIndex].label;
+    _yearController.text = _yearListDropdown.first.label;
+    _listAttendance = [];
+    notifyListeners();
   }
 
   search() async {

@@ -56,14 +56,14 @@ flutter pub run build_runner build
 
 ### 4. Konfigurasi Backend URL
 
-**URL Backend Default**: `https://presensi.dewakoding.com`
+**URL Backend Default**: `https://att.sijasmkn1punggelan.org`
 
 #### Jika Backend URL Berubah:
 
 1. **Buka file**: `lib/core/constant/constant.dart`
 2. **Ubah konstanta**: `BASE_URL`
    ```dart
-   const String BASE_URL = 'https://presensi.dewakoding.com'; // Ganti dengan URL baru
+   const String BASE_URL = 'https://att.sijasmkn1punggelan.org'; // Ganti dengan URL baru
    ```
 3. **Rebuild aplikasi**:
    ```bash

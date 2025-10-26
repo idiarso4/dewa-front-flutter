@@ -14,7 +14,7 @@ class _PhotoApiService implements PhotoApiService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://presensi.dewakoding.com';
+    baseUrl ??= 'https://att.sijasmkn1punggelan.org';
   }
 
   final Dio _dio;

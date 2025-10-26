@@ -1,4 +1,6 @@
-﻿const String BASE_URL = 'https://presensi.dewakoding.com';
+// ignore_for_file: constant_identifier_names
+
+const String BASE_URL = 'https://att.sijasmkn1punggelan.org';
 
 const String PREF_AUTH = 'pref-auth';
 const String PREF_ID = 'pred_id';

@@ -14,7 +14,7 @@ class _ScheduleApiService implements ScheduleApiService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://presensi.dewakoding.com';
+    baseUrl ??= 'https://att.sijasmkn1punggelan.org';
   }
 
   final Dio _dio;

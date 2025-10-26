@@ -1,12 +1,12 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:flutter/material.dart';
 import 'package:presensi_smkn1punggelan/app/presentation/leave/leave_notifier.dart';
 import 'package:presensi_smkn1punggelan/core/helper/date_time_helper.dart';
 import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/material/app_bar.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class LeaveScreen extends AppWidget<LeaveNotifier, void, void> {
-  LeaveScreen({super.key});
+  const LeaveScreen({super.key});
 
   @override
   AppBar? appBarBuild(BuildContext context) {

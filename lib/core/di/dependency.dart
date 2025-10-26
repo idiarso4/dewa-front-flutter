@@ -80,7 +80,7 @@ Future<void> initDependency() async {
     (param1, param2) => LoginNotifier(sl()),
   );
   sl.registerFactoryParam<HomeNotifier, void, void>(
-    (param1, param2) => HomeNotifier(sl(), sl(), sl(), sl()),
+    (param1, param2) => HomeNotifier(sl(), sl(), sl()),
   );
   sl.registerFactoryParam<MapNotifier, void, void>(
     (param1, param2) => MapNotifier(sl(), sl(), sl()),

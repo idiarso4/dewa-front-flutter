@@ -1,4 +1,6 @@
-﻿import 'package:flutter/cupertino.dart';
+// ignore_for_file: unnecessary_getters_setters
+
+import 'package:flutter/cupertino.dart';
 
 abstract class AppProvider with ChangeNotifier {
   bool _isLoading = false;

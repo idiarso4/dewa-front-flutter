@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:presensi_smkn1punggelan/app/presentation/home/home_screen.dart';
 import 'package:presensi_smkn1punggelan/app/presentation/login/login_notifier.dart';
 import 'package:presensi_smkn1punggelan/core/helper/global_helper.dart';
@@ -5,6 +7,7 @@ import 'package:presensi_smkn1punggelan/core/widget/app_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends AppWidget<LoginNotifier, void, void> {
+  const LoginScreen({super.key});
   @override
   void checkVariableAfterUi(BuildContext context) {
     if (notifier.isLoged) {
@@ -142,7 +145,7 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
   Widget _buildLoginButton(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: double.maxFinite,
           child: FilledButton(
             style: FilledButton.styleFrom(
@@ -227,12 +230,12 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
   }
 
   void _onPressGoogleLogin(BuildContext context) {
-    // TODO: Implement Google login
+    // Placeholder for future Google login integration
     notifier.googleLogin();
   }
 
   void _onPressFacebookLogin(BuildContext context) {
-    // TODO: Implement Facebook login
+    // Placeholder for future Facebook login integration
     notifier.facebookLogin();
   }
 }
