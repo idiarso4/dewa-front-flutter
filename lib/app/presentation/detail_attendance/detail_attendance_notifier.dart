@@ -48,7 +48,7 @@ class DetailAttendanceNotifier extends AppProvider {
   void init() {
     final now = DateTime.now();
     final monthIndex =
-        (now.month - 1).clamp(0, _monthListDropdown.length - 1) as int;
+        ((now.month - 1).clamp(0, _monthListDropdown.length - 1)).toInt();
     _monthController.text = _monthListDropdown[monthIndex].label;
     _yearController.text = _yearListDropdown.first.label;
     _listAttendance = [];
